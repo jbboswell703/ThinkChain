@@ -18,8 +18,10 @@
 
 ### Fixed
 - Relative import paths in `llm-service.ts` now use explicit file extensions for Node ESM compatibility (fixed import lint errors).
+- Debugged persistent JSX syntax error in `app/refinement/page.tsx` by removing stray parenthesis, verifying JSX tag balance, clearing node_modules and build cache, and retyping the return line to eliminate invisible character/encoding issues. Awaiting confirmation of final error resolution.
 
 ### Notes
+- Extensive troubleshooting performed on `app/refinement/page.tsx` due to persistent `Unexpected token 'div'` JSX error. Steps included code review, dependency and cache clearing, and file encoding checks. The file is now ready for further verification upon next session.
 - Call `buildLLMChain()` to get the current working chain at any time; it will always include 5 healthy models, filling with OpenRouter free models as needed.
 - If using TypeScript/ESM for other services, continue using `.cjs` for Anthropic until upstream compatibility is improved.
 - Ensure your Anthropic account has credits to avoid 400 errors.
@@ -43,6 +45,25 @@
   - React and React DOM downgraded to 18.2.0
   - Added specific versions for AI SDKs (@anthropic-ai/sdk, @google/generative-ai)
   - Updated ws package to compatible version
+
+## [TROUBLESHOOTING LOCAL DEV] - 2025-05-21
+### Node.js Setup & Local Preview
+- Attempting to run ThinkChain locally at http://localhost:3000 for development/testing
+- Encountered error: 'node' not recognized as a command
+- Discovered Node.js is installed on external drive (D:\Storage2\nodejs)
+- Added Node.js folder to PATH environment variable
+- Currently unable to reopen environment variables dialog to verify PATH
+- Next steps: Restart computer to ensure PATH changes take effect, then verify Node.js installation with 'node -v' and try 'npm run dev' again
+- Purpose: Ensuring project can be run and previewed locally for development and testing
+
+## [0.2.0] - 2025-05-21
+### Security, Git, and Deployment
+- **All hardcoded secrets and credentials fully removed from codebase and git history**
+- **All API keys and sensitive config now stored ONLY in `.env` (and `.gitignore`)**
+- **Git history re-initialized for a clean, safe project state**
+- **Successfully pushed to both `ThinkChain` and `ThinkChain.v0.2` repositories with no secrets**
+- **Security best practices now enforced for all future development**
+- **Project is ready for safe Vercel deployment from either repo**
 
 ### Notes
 - Node.js and dependencies successfully installed
